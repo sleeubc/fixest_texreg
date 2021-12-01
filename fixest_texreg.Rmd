@@ -1,0 +1,52 @@
+---
+title: "Making regression tables from fixest estimation, using texreg"
+author: "Sanghoon"
+date: "29/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r message=FALSE}
+library(fixest)
+#remotes::install_github("leifeld/texreg") #Install texreg from Github instead of CRAN
+library(texreg)
+```
+
+Set default options for which summary stats to include in screenreg() and texreg().
+See https://rdrr.io/github/leifeld/texreg/man/extract-fixest-method.html for other options.
+
+```{r}
+screenreg <- purrr::partial(screenreg, include.adjrs=FALSE, include.proj.stats=FALSE)
+texreg <- purrr::partial(texreg, include.adjrs=FALSE, include.proj.stats=FALSE)
+```
+
+Sample data
+
+```{r}
+head(iris)
+```
+
+Regressions
+
+```{r}
+res1 = feols(Sepal.Length ~ Petal.Length, iris, cluster = "Species")
+res2 = feols(Sepal.Length ~ Sepal.Width, iris, cluster = "Species")
+res3 = feols(Sepal.Length ~ Sepal.Width + Petal.Length, iris, cluster = "Species")
+```
+
+`screenreg()` shows a regression table on screen. 
+```{r}
+screenreg(list(res1, res2, res3))
+```
+
+`texreg()` outputs a regression table as a LaTeX code. One can save the codes as a file using `file=` argument. It offers numerous customization options. Try `? texreg`.
+
+```{r}
+texreg(list(res1, res2, res3))
+```
+
