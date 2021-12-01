@@ -9,15 +9,20 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
+The following code chunk installs all the packages used in this tutorial. (Remove `#` at the beginning of each line.) It is important to install `texreg` from Github; the CRAN version does not support `fixest`.
+```{r}
+#install.packages("fixest")
+#install.packages("remotes")
+#remotes::install_github("leifeld/texreg") 
+#install.packages("purrr")
+```
 
 ```{r message=FALSE}
 library(fixest)
-#remotes::install_github("leifeld/texreg") #Install texreg from Github instead of CRAN
 library(texreg)
 ```
 
-Set default options for which summary stats to include in screenreg() and texreg().
+The following chunk sets default options for which summary stats to include in screenreg() and texreg().
 See https://rdrr.io/github/leifeld/texreg/man/extract-fixest-method.html for other options.
 
 ```{r}

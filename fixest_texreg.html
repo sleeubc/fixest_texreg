@@ -171,10 +171,14 @@ pre code {
 </div>
 
 
+<p>The following code chunk installs all the packages used in this tutorial. (Remove <code>#</code> at the beginning of each line.) It is important to install <code>texreg</code> from Github; the CRAN version does not support <code>fixest</code>.</p>
+<pre class="r"><code>#install.packages(&quot;fixest&quot;)
+#install.packages(&quot;remotes&quot;)
+#remotes::install_github(&quot;leifeld/texreg&quot;) 
+#install.packages(&quot;purrr&quot;)</code></pre>
 <pre class="r"><code>library(fixest)
-#remotes::install_github(&quot;leifeld/texreg&quot;) #Install texreg from Github instead of CRAN
 library(texreg)</code></pre>
-<p>Set default options for which summary stats to include in screenreg() and texreg(). See <a href="https://rdrr.io/github/leifeld/texreg/man/extract-fixest-method.html" class="uri">https://rdrr.io/github/leifeld/texreg/man/extract-fixest-method.html</a> for other options.</p>
+<p>The following chunk sets default options for which summary stats to include in screenreg() and texreg(). See <a href="https://rdrr.io/github/leifeld/texreg/man/extract-fixest-method.html" class="uri">https://rdrr.io/github/leifeld/texreg/man/extract-fixest-method.html</a> for other options.</p>
 <pre class="r"><code>screenreg &lt;- purrr::partial(screenreg, include.adjrs=FALSE, include.proj.stats=FALSE)
 texreg &lt;- purrr::partial(texreg, include.adjrs=FALSE, include.proj.stats=FALSE)</code></pre>
 <p>Sample data</p>
